@@ -45,9 +45,11 @@ public class AssetState implements LinearState {
     public Party getIssuer() {
         return issuer;
     }
+
     public Party getOwner() {
         return owner;
     }
+
     public String getDescription() {
         return description;
     }
@@ -56,5 +58,10 @@ public class AssetState implements LinearState {
     @Override
     public UniqueIdentifier getLinearId() {
         return linearId;
+    }
+
+    @Override
+    public String toString() {
+        return "AssetState{issuer=" + issuer + ", owner=" + owner + ", description='" + description + '\'' + ", linearId=" + linearId + '}';
     }
 }

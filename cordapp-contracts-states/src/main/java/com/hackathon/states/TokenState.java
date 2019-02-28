@@ -29,10 +29,17 @@ public class TokenState implements ContractState {
     public Party getIssuer() {
         return issuer;
     }
+
     public Party getOwner() {
         return owner;
     }
+
     public int getAmount() {
         return amount;
+    }
+
+    @Override
+    public String toString() {
+        return "TokenState{issuer=" + issuer + ", owner=" + owner + ", amount=" + amount + '}';
     }
 }
