@@ -1,4 +1,4 @@
-package com.template.states;
+package com.hackathon.states;
 
 import net.corda.core.contracts.LinearState;
 import net.corda.core.contracts.UniqueIdentifier;

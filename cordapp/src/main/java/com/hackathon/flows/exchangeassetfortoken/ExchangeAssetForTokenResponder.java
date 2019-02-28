@@ -1,7 +1,7 @@
-package com.template.flows.exchangeassetfortoken;
+package com.hackathon.flows.exchangeassetfortoken;
 
 import co.paralleluniverse.fibers.Suspendable;
-import com.template.states.TokenState;
+import com.hackathon.states.TokenState;
 import net.corda.core.contracts.StateAndRef;
 import net.corda.core.flows.*;
 import net.corda.core.transactions.SignedTransaction;

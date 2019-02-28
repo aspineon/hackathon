@@ -3,12 +3,12 @@
     <module name="cordapp_test" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.template.*" />
+        <option name="PATTERN" value="com.hackathon.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="PACKAGE_NAME" value="com.template.flows" />
-    <option name="MAIN_CLASS_NAME" value="com.template.flows.FlowTests" />
+    <option name="PACKAGE_NAME" value="com.hackathon.flows" />
+    <option name="MAIN_CLASS_NAME" value="com.hackathon.flows.FlowTests" />
     <option name="METHOD_NAME" value="" />
     <option name="VM_PARAMETERS" value="-ea -javaagent:lib/quasar.jar" />
     <option name="PARAMETERS" value="" />

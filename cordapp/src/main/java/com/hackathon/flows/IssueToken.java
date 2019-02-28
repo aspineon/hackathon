@@ -1,8 +1,8 @@
-package com.template.flows;
+package com.hackathon.flows;
 
 import co.paralleluniverse.fibers.Suspendable;
-import com.template.contracts.AssetContract;
-import com.template.states.AssetState;
+import com.hackathon.contracts.TokenContract;
+import com.hackathon.states.TokenState;
 import net.corda.core.flows.*;
 import net.corda.core.identity.Party;
 import net.corda.core.transactions.SignedTransaction;
@@ -10,22 +10,21 @@ import net.corda.core.transactions.TransactionBuilder;
 import net.corda.core.utilities.ProgressTracker;
 
 import java.security.PublicKey;
-import java.util.UUID;
 
 // ******************
 // * Initiator flow *
 // ******************
 @InitiatingFlow
 @StartableByRPC
-public class IssueAsset extends FlowLogic<UUID> {
+public class IssueToken extends FlowLogic<Void> {
     private final ProgressTracker progressTracker = new ProgressTracker();
 
     private final Party recipient;
-    private final String description;
+    private final int amount;
 
-    public IssueAsset(Party recipient, String description) {
+    public IssueToken(Party recipient, int amount) {
         this.recipient = recipient;
-        this.description = description;
+        this.amount = amount;
     }
 
     @Override
@@ -35,21 +34,21 @@ public class IssueAsset extends FlowLogic<UUID> {
 
     @Suspendable
     @Override
-    public UUID call() throws FlowException {
+    public Void call() throws FlowException {
         Party notary = getServiceHub().getNetworkMapCache().getNotaryIdentities().get(0);
 
-        AssetState output = new AssetState(getOurIdentity(), recipient, description);
-        AssetContract.Commands.Issue command = new AssetContract.Commands.Issue();
+        TokenState output = new TokenState(getOurIdentity(), recipient, amount);
+        TokenContract.Commands.Issue command = new TokenContract.Commands.Issue();
         PublicKey requiredSigner = getOurIdentity().getOwningKey();
 
         TransactionBuilder txBuilder = new TransactionBuilder(notary)
-                .addOutputState(output, AssetContract.ID)
+                .addOutputState(output, TokenContract.ID)
                 .addCommand(command, requiredSigner);
 
         SignedTransaction signedTx = getServiceHub().signInitialTransaction(txBuilder);
 
         subFlow(new FinalityFlow(signedTx));
 
-        return output.getLinearId().getId();
+        return null;
     }
 }

@@ -1,4 +1,4 @@
-package com.template.states;
+package com.hackathon.states;
 
 import net.corda.core.contracts.ContractState;
 import net.corda.core.identity.AbstractParty;

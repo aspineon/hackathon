@@ -1,10 +1,10 @@
-package com.template.flows;
+package com.hackathon.flows;
 
 import com.google.common.collect.ImmutableList;
-import com.template.flows.exchangeassetfortoken.ExchangeAssetForTokenInitiator;
-import com.template.flows.exchangeassetfortoken.ExchangeAssetForTokenResponder;
-import com.template.states.AssetState;
-import com.template.states.TokenState;
+import com.hackathon.flows.exchangeassetfortoken.ExchangeAssetForTokenInitiator;
+import com.hackathon.flows.exchangeassetfortoken.ExchangeAssetForTokenResponder;
+import com.hackathon.states.AssetState;
+import com.hackathon.states.TokenState;
 import net.corda.core.concurrent.CordaFuture;
 import net.corda.core.contracts.StateAndRef;
 import net.corda.core.flows.FlowException;
@@ -23,7 +23,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertEquals;
 
 public class FlowTests {
-    private final MockNetwork network = new MockNetwork(ImmutableList.of("com.template.contracts"));
+    private final MockNetwork network = new MockNetwork(ImmutableList.of("com.hackathon.contracts"));
     private final StartedMockNode a = network.createNode();
     private final StartedMockNode b = network.createNode();
     private final StartedMockNode c = network.createNode();
