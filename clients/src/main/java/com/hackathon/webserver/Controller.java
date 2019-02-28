@@ -62,13 +62,13 @@ public class Controller {
     private ResponseEntity<String> exchangeAssetForToken(HttpServletRequest request) {
         String assetIdString = request.getParameter("assetId");
         String counterpartyName = request.getParameter("counterparty");
-        String amount = request.getParameter("amount");
+        int amount = Integer.valueOf(request.getParameter("amount"));
 
         UUID assetId = UUID.fromString(assetIdString);
         Party counterparty = proxy.partiesFromName(counterpartyName, true).iterator().next();
 
         proxy.startFlowDynamic(ExchangeAssetForTokenInitiator.class, assetId, counterparty, amount);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Asset issued.\n");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Asset exchanged for tokens.\n");
     }
 
     @GetMapping(value = "tokens", produces = "application/json")
@@ -98,7 +98,7 @@ public class Controller {
             map.put("issuer", asset.getIssuer().getName().getOrganisation());
             map.put("owner", asset.getOwner().getName().getOrganisation());
             map.put("description", asset.getDescription());
-            map.put("id", asset.getLinearId().getId().toString());
+            map.put("assetid", asset.getLinearId().getId().toString());
 
             return map;
         }).collect(Collectors.toList());

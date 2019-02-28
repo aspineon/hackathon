@@ -23,11 +23,11 @@
 <form action="/issue-token" method="post" class="col-sm-12">
     <div class="form-group col-sm-6">
         <label for="recipient-it">Recipient:</label>
-        <input id="recipient-it" type="text" class="form-control" name="recipient-it">
+        <input id="recipient-it" type="text" class="form-control" name="recipient">
     </div>
     <div class="form-group col-sm-6">
         <label for="amount-it">Amount:</label>
-        <input id="amount-it" type="text" class="form-control" name="amount-it">
+        <input id="amount-it" type="text" class="form-control" name="amount">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -37,11 +37,11 @@
 <form action="/issue-asset" method="post" class="col-sm-12">
     <div class="form-group col-sm-6">
         <label for="recipient-ia">Recipient:</label>
-        <input id="recipient-ia" type="text" class="form-control" name="recipient-ia">
+        <input id="recipient-ia" type="text" class="form-control" name="recipient">
     </div>
     <div class="form-group col-sm-6">
         <label for="description-ia">Description:</label>
-        <input id="description-ia" type="text" class="form-control" name="description-ia">
+        <input id="description-ia" type="text" class="form-control" name="description">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -51,15 +51,15 @@
 <form action="/exchange-asset-for-token" method="post" class="col-sm-12">
     <div class="form-group col-sm-4">
         <label for="assetid-eaft">Asset ID:</label>
-        <input id="assetid-eaft" type="text" class="form-control" name="assetid-eaft">
+        <input id="assetid-eaft" type="text" class="form-control" name="assetId">
     </div>
     <div class="form-group col-sm-4">
         <label for="counterparty-eaft">Counterparty:</label>
-        <input id="counterparty-eaft" type="text" class="form-control" name="counterparty-eaft">
+        <input id="counterparty-eaft" type="text" class="form-control" name="counterparty">
     </div>
     <div class="form-group col-sm-4">
         <label for="amount-eaft">Amount:</label>
-        <input id="amount-eaft" type="text" class="form-control" name="amount-eaft">
+        <input id="amount-eaft" type="text" class="form-control" name="amount">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -96,6 +96,7 @@
                             <li>Issuer: {{asset.issuer}}</li>
                             <li>Owner: {{asset.owner}}</li>
                             <li>Description: {{asset.description}}</li>
+                            <li>ID: {{asset.assetid}}</li>
                         </ul>
                     </div>
                 </div>
