@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 /**
@@ -37,29 +38,29 @@ public class Controller {
     }
 
     @PostMapping(path = "issue-token", produces = "text/plain")
-    private ResponseEntity<String> issueToken(HttpServletRequest request) {
+    private ResponseEntity<String> issueToken(HttpServletRequest request) throws ExecutionException, InterruptedException {
         String recipientName = request.getParameter("recipient");
         Integer amount = Integer.valueOf(request.getParameter("amount"));
 
         Party recipient = proxy.partiesFromName(recipientName, true).iterator().next();
 
-        proxy.startFlowDynamic(IssueToken.class, recipient, amount);
+        proxy.startFlowDynamic(IssueToken.class, recipient, amount).getReturnValue().get();
         return ResponseEntity.status(HttpStatus.CREATED).body("Token issued.\n");
     }
 
     @PostMapping(path = "issue-asset", produces = "text/plain")
-    private ResponseEntity<String> issueAsset(HttpServletRequest request) {
+    private ResponseEntity<String> issueAsset(HttpServletRequest request) throws ExecutionException, InterruptedException {
         String recipientName = request.getParameter("recipient");
         String description = request.getParameter("description");
 
         Party recipient = proxy.partiesFromName(recipientName, true).iterator().next();
 
-        proxy.startFlowDynamic(IssueAsset.class, recipient, description);
+        proxy.startFlowDynamic(IssueAsset.class, recipient, description).getReturnValue().get();
         return ResponseEntity.status(HttpStatus.CREATED).body("Asset issued.\n");
     }
 
     @PostMapping(path = "exchange-asset-for-token", produces = "text/plain")
-    private ResponseEntity<String> exchangeAssetForToken(HttpServletRequest request) {
+    private ResponseEntity<String> exchangeAssetForToken(HttpServletRequest request) throws ExecutionException, InterruptedException {
         String assetIdString = request.getParameter("assetId");
         String counterpartyName = request.getParameter("counterparty");
         int amount = Integer.valueOf(request.getParameter("amount"));
@@ -67,7 +68,7 @@ public class Controller {
         UUID assetId = UUID.fromString(assetIdString);
         Party counterparty = proxy.partiesFromName(counterpartyName, true).iterator().next();
 
-        proxy.startFlowDynamic(ExchangeAssetForTokenInitiator.class, assetId, counterparty, amount);
+        proxy.startFlowDynamic(ExchangeAssetForTokenInitiator.class, assetId, counterparty, amount).getReturnValue().get();
         return ResponseEntity.status(HttpStatus.CREATED).body("Asset exchanged for tokens.\n");
     }
 
